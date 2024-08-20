@@ -15,4 +15,7 @@
 проверять результат.
 """
 
-mac = "AAAA:BBBB:CCCC"
+mac = "A14A:BBBB:CCCC"
+mylist = [bin(int(maci, 16))[2:] for maci in mac.split(':')]
+mac = ''.join(mylist)
+print(mac)
