@@ -49,3 +49,30 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+perem= input().split('/')
+ip = perem[0]
+mask = int(perem[1])
+
+
+binip = ''.join(['{:08b}'.format(int(num)) for num in ip.split('.')]) # {:08b} двоичный формат с заполнением нулей до длины 8
+bin_network = binip[:mask] + "0" * (32-mask) # меняем айпи хоста на айпи сети, заменяя биты хоста на 0
+octets = [int(bin_network[8*i:8*(i+1)], 2) for i in range(4)]
+
+
+bin_mask = "1" * mask + "0" * (32 - mask)
+ten_mask = [int(bin_mask[8*i:8*(i+1)], 2) for i in range(4)]
+
+
+outputip='''
+Network:
+{0:<10}{1:<10}{2:<10}{3:<10}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}
+'''
+outputmask='''
+Mask:
+/{0}
+{1:<10}{2:<10}{3:<10}{4:<10}
+{1:08b}  {2:08b}  {3:08b}  {4:08b}
+'''
+print(outputip.format(*octets))
+print(outputmask.format(mask, *ten_mask))

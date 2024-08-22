@@ -30,3 +30,22 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+perem= input().split('/')
+ip = perem[0]
+mask0 = perem[1]
+octets = [int(num) for num in ip.split('.')]
+mask = "1" * int(perem[1]) + "0" * (32 - int(perem[1]))
+mask = [int(mask[8*i:8*(i+1)], 2) for i in range(4)]
+outputip='''
+Network:
+{0:<10}{1:<10}{2:<10}{3:<10}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}
+'''
+outputmask='''
+Mask:
+/{0}
+{1:<10}{2:<10}{3:<10}{4:<10}
+{1:08b}  {2:08b}  {3:08b}  {4:08b}
+'''
+print(outputip.format(*octets))
+print(outputmask.format(mask0, *mask))
