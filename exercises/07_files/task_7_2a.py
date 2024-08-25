@@ -15,5 +15,16 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+from sys import argv
+
 
 ignore = ["duplex", "alias", "configuration"]
+file_name = argv[1]
+
+
+with open(file_name) as file:
+    for line in file:
+        #print(all([line.find(word) == -1 for word in ignore]))
+        if not line.startswith('!') and all([line.find(word) == -1 for word in ignore]) is True:
+             print(line.rstrip())
+

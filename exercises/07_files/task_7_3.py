@@ -20,3 +20,9 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+with open('CAM_table.txt') as file:
+    for line in file:
+        data = line.split()
+        if data and data[0].isdigit():
+            vlan, mac, ports = data[0], data[1], data[-1]
+            print('{:10}{:20}{:8}'.format(vlan, mac, ports))
