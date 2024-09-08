@@ -60,3 +60,23 @@ trunk_config_2 = {
     "FastEthernet0/15": [111, 130],
     "FastEthernet0/14": [117],
 }
+
+
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
+    """
+    Функция должна возвращать список команд с конфигурацией на основе указанных портов
+    и шаблона trunk_mode_template. В конце строк в списке не должно быть символа
+    перевода строки.
+    """
+    trunk_config = []
+    for key, value in intf_vlan_mapping.items():
+        intf, vlans = key, ','.join(str(vlan) for vlan in value)
+        trunk_config.append(f'interface {intf}')
+        for command in trunk_template:
+            if 'allowed' in command:
+                trunk_config.append(f'{command} {vlans}')
+            else:
+                trunk_config.append(command)
+    return trunk_config
+print(generate_trunk_config(trunk_config, trunk_mode_template))
+
